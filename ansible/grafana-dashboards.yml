@@ -1,0 +1,28 @@
+---
+- name: install grafana dashboards
+  hosts: raspberrypis
+  tasks:
+    - name: Copy dashboard to raspberry
+      copy:
+        src: ./grafana/solar-dashboard.json
+        dest: /tmp/
+      become: true
+
+    - name: Import Grafana dashboard solar
+      community.grafana.grafana_dashboard:
+        grafana_url: http://raspberrypi.local:3000
+        grafana_user: admin
+        grafana_password: admin
+        state: present
+        commit_message: Updated by ansible
+        overwrite: yes
+        path: /tmp/solar-dashboard.json
+
+    - name: Import prometheus dashboard
+      community.grafana.grafana_dashboard:
+        grafana_url: http://raspberrypi.local:3000
+        grafana_user: admin
+        grafana_password: admin
+        dashboard_id: 1860
+
+

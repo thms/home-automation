@@ -1,0 +1,17 @@
+---
+- import_playbook: sqlite.yml
+- import_playbook: dependencies.yml
+- import_playbook: node-red.yml
+- import_playbook: deploy.yml
+- import_playbook: node-exporter.yml
+- import_playbook: prometheus.yml
+- import_playbook: grafana.yml
+- import_playbook: grafana-datasources.yml
+- import_playbook: grafana-dashboards.yml
+- import_playbook: canhat.yml
+- import_playbook: nodered-flows.yml
+
+
+
+
+

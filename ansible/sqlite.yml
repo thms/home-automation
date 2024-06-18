@@ -1,0 +1,10 @@
+---
+- name: install sqlite3
+  hosts: raspberrypis
+  tasks:
+    - name: apt
+      ansible.builtin.apt:
+        name: sqlite3
+        update_cache: yes
+        state: present
+      become: true

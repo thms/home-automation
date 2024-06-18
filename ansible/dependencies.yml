@@ -1,0 +1,17 @@
+---
+- name: deploy application
+  hosts: raspberrypis
+  tasks:
+    - name: Install pip3
+      ansible.builtin.apt:
+        name: python3-pip
+      become: true
+    - name: Install neohubapi
+      ansible.builtin.pip:
+        name: neohubapi
+      become: true
+    - name: Install dotenv
+      ansible.builtin.pip:
+        name: python-dotenv
+      become: true
+

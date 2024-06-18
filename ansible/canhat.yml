@@ -1,0 +1,19 @@
+---
+- name: configure can hat
+  hosts: raspberrypis
+  tasks:
+
+    - name: copy config file
+      ansible.builtin.copy:
+        src: ./canhat/config.txt
+        dest: /boot/
+      become: true
+
+    # - name: copy commandline file
+    #   ansible.builtin.copy:
+    #     src: ./canhat/cmdline.txt
+    #     dest: /boot/
+
+    - name: reboot raspberry pi
+      ansible.builtin.reboot:
+      become: true

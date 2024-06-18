@@ -1,0 +1,38 @@
+---
+- name: install node-red and dependencies
+  hosts: raspberrypis
+  tasks:
+
+    - name: Download update-nodejs-and-nodered
+      get_url:
+        url: https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
+        dest: /tmp/update-nodejs-and-nodered
+        mode: 0777
+
+    - name: create home dir
+      ansible.builtin.file:
+        path: /home/thomasboltze/.node-red
+        state: directory
+        mode: '0755'
+
+    - name: copy config file
+      ansible.builtin.copy:
+        src: ./nodered/settings.js
+        dest: /home/thomasboltze/.node-red/
+
+    - name: Upgrade nodejs and nodered
+      shell: "yes|/tmp/update-nodejs-and-nodered --node20 --confirm-install --confirm-pi"
+
+    - name: start and enable node-red service
+      systemd:
+        name: nodered
+        enabled: yes
+        state: started
+      become: true
+
+    - name: install npm
+      ansible.builtin.apt:
+        name: npm
+        update_cache: yes
+        state: present
+      become: true

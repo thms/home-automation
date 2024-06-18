@@ -1,0 +1,23 @@
+---
+- name: install grafana data sources
+  hosts: raspberrypis
+  tasks:
+    - name: add sqlite datasource
+      ansible.builtin.uri:
+        url: http://raspberrypi.local:3000/api/datasources
+        user: admin
+        password: admin
+        force_basic_auth: true
+        method: POST
+        body_format: json
+        body: '{"orgId":1,"name":"SQLite","type":"frser-sqlite-datasource","access":"proxy","url":"","user":"","database":"","basicAuth":false,"isDefault":true,"jsonData":{"attachLimit":0,"path":"/home/thomasboltze/solar/db/development.sqlite","pathOptions":"mode=ro","pathPrefix":"file:"},"readOnly":true}'
+
+    - name: create prometheus datasource
+      community.grafana.grafana_datasource:
+        grafana_url: "http://raspberrypi.local:3000"
+        grafana_user: "admin"
+        grafana_password: "admin"
+        name: prometheus
+        ds_type: prometheus
+        ds_url: http://localhost:9090
+        access: proxy

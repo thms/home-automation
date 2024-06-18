@@ -1,0 +1,32 @@
+---
+- name: back up config for database etc.
+  hosts: raspberrypis
+  tasks:
+
+    - name: remove NAS drive in case it is mounted
+      ansible.posix.mount:
+        path: /mnt/backups
+        fstype: cifs
+        state: unmounted
+      become: true
+
+    - name: configure NAS drive for automount
+      ansible.posix.mount:
+        src: //mycloudex2ultra.local/Public/solar-backup
+        path: /mnt/backups
+        boot: true
+        opts: rw,guest,user=thomasboltze,x-systemd.automount,x-systemd.idle-timeout=60s,noatime
+        fstype: cifs
+        state: present
+      become: true
+
+    - name: Reload systemd daemon if unit file is changed.
+      systemd:
+        daemon_reload: true
+      become: true
+
+    - name: start automount for NAS
+      systemd:
+        state: started
+        name: mnt-backups.automount
+      become: true 

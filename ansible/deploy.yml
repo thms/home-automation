@@ -1,0 +1,22 @@
+---
+- name: deploy application
+  hosts: raspberrypis
+  tasks:
+
+    - name: Create root directory unless exists
+      ansible.builtin.file:
+        path: /home/thomasboltze/solar
+        state: directory
+        mode: '0755'
+    - name: Create db directory unless exists
+      ansible.builtin.file:
+        path: /home/thomasboltze/solar/db
+        state: directory
+        mode: '0755'
+    - name: install minimal modbus
+      ansible.builtin.pip:
+        name: minimalmodbus
+    # - name: Copy libraries
+    #   ansible.builtin.copy:
+    #     src: ../lib
+    #     dest: /home/thomasboltze/solar/

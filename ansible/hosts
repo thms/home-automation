@@ -1,0 +1,2 @@
+[raspberrypis]
+raspberrypi ansible_host=192.168.188.112 ansible_user=thomasboltze ansible_ssh_common_args='-o StrictHostKeyChecking=no'

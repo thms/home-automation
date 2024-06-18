@@ -1,0 +1,16 @@
+---
+- name: deploy node-red flows
+  hosts: raspberrypis
+  tasks:
+
+    - name: deploy flow file to raspberry
+      ansible.builtin.copy:
+        src: ./nodered/flows.json
+        dest: /home/thomasboltze/.node-red/
+
+    - name: start and enable node-red service
+      systemd:
+        name: nodered
+        enabled: yes
+        state: restarted
+      become: true
