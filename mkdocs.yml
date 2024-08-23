@@ -7,4 +7,5 @@ nav:
 plugins:
   - techdocs-core
   - kroki:
-     FencePrefix: ''
+      inline: true
+      FencePrefix: ''
