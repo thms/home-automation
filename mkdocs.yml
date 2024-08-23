@@ -1,0 +1,8 @@
+site_name: Home-Automation
+nav:
+  - Home: 'index.md'
+  - Summary: 'summary.md'
+  - Readme: 'readme.md'
+  - Architecture: 'architecture.md'
+plugins:
+  - techdocs-core

@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: home-automation
+  annotations:
+    github.com/project-slug: thms/home-automation
+    backstage.io/techdocs-ref: dir:.
+  links:
+    - title: Getting Started
+      url: https://github.com/thms/home-automation/README.md
+      type: Readme
+      icon: github
+spec:
+  type: component
+  lifecycle: production
+  owner: thms
