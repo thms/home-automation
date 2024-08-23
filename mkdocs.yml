@@ -4,8 +4,9 @@ nav:
   - Summary: 'summary.md'
   - Readme: 'readme.md'
   - Architecture: 'architecture.md'
+  - Data Model: 'data-model.md'
 plugins:
   - techdocs-core
-  - kroki:
+  - 'kroki':
       inline: true
       FencePrefix: ''
